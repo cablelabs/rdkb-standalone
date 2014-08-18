@@ -7,7 +7,9 @@ CCSP Simulator
 ==============
 
 To stage the simulator, you need to first execute the <i>scripts/stage_pc.pl</i>
-Perl script.
+Perl script. The files staged will be retrieved from $CCSP_ROOT. By default, this
+environment variable is set to "..". The files will be staged in the $STAGE_ROOT
+directory. By default, this environment variable is set to ".".
 
 To run the simulator, you will need 2 terminal sessions. In the first terminal,
 execute the following in the staged directory:
