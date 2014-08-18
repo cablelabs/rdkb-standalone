@@ -80,11 +80,16 @@ my @src = (
 
 # CCSP ROOT directory
 my $CCSP_ROOT = "..";
+if (defined $ENV{'CCSP_ROOT'}) { $CCSP_ROOT = $ENV{'CCSP_ROOT'} };
+print "Using CCSP_ROOT: " . $CCSP_ROOT . "\n";
+
 # Staging HOME directory.
-my $STAGE_ROOT = "";
+my $STAGE_ROOT = ".";
+if (defined $ENV{'STAGE_ROOT'}) { $STAGE_ROOT = $ENV{'STAGE_ROOT'} };
+print "Using STAGE_ROOT: " . $STAGE_ROOT .  "\n";
 
 sub createDir {
-    my $directory = $STAGE_ROOT . $_[0];
+    my $directory = $STAGE_ROOT . "/" . $_[0];
     print "Creating $directory ...\n";
 
     unless(-e $directory || mkpath($directory)) {
@@ -129,48 +134,48 @@ sub main {
     # Copy the files over to the staging directory.
     for my $ref (@src) {
 	my $source = $CCSP_ROOT . "/" . @$ref[0];
-	my $destination = $STAGE_ROOT . @$ref[1];
+	my $destination = $STAGE_ROOT . "/" . @$ref[1];
 	#print "Source: " . $source . "\n";
 	#print "Destination: " . $destination . "\n";
 	copyFile($source, $destination);
     }
 
     # Fix file permissions.
-    chmod 0755, $STAGE_ROOT . "dbus-daemon";
-    chmod 0755, $STAGE_ROOT . "snmpd";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/basic.conf";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/CcspCrSsp";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/dmcli";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/psmcli";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/ccsp_msg.cfg";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/cli_start_pc.sh";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/cosa_start_pc.sh";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/libccsp_common.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/PsmSsp";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/cm/CcspCMAgentSsp";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/cm/libcm_tr181.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/cm/CcspCMDM_pc.cfg";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/cm/CcspCM_pc.cfg";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/cm/ccsp_msg_pc.cfg";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/lm/CcspLMLite";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/lm/liblmapi.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/mta/CcspMtaAgentSsp";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/mta/libmta_tr181.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/mta/ccsp_msg_pa.cfg";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/pam/CcspPandMSsp";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/pam/libtr181.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/rm/CcspRmSsp";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/snmp/libs/libsnmp_plugin.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/snmp/run_snmpd.sh";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/snmp/run_subagent.sh";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/tad/CcspTandDSsp";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/tad/libdiagnostic.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/tad/libdmltad.so";
-    chmod 0755, $STAGE_ROOT . "usr/ccsp/tr069pa/CcspTr069PaSsp";
+#    chmod 0755, $STAGE_ROOT . "/" . "dbus-daemon";
+#    chmod 0755, $STAGE_ROOT . "/" . "snmpd";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/basic.conf";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/CcspCrSsp";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/dmcli";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/psmcli";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/ccsp_msg.cfg";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/cli_start_pc.sh";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/cosa_start_pc.sh";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/libccsp_common.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/PsmSsp";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/cm/CcspCMAgentSsp";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/cm/libcm_tr181.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/cm/CcspCMDM_pc.cfg";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/cm/CcspCM_pc.cfg";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/cm/ccsp_msg_pc.cfg";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/lm/CcspLMLite";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/lm/liblmapi.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/mta/CcspMtaAgentSsp";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/mta/libmta_tr181.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/mta/ccsp_msg_pa.cfg";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/pam/CcspPandMSsp";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/pam/libtr181.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/rm/CcspRmSsp";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/snmp/libs/libsnmp_plugin.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/snmp/run_snmpd.sh";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/snmp/run_subagent.sh";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/tad/CcspTandDSsp";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/tad/libdiagnostic.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/tad/libdmltad.so";
+    chmod 0755, $STAGE_ROOT . "/" . "usr/ccsp/tr069pa/CcspTr069PaSsp";
 
     # Fix file links.
     my $curdir = getcwd;
-    chdir $STAGE_ROOT . "usr/ccsp";
+    chdir $STAGE_ROOT . "/" . "usr/ccsp";
     symlink "dmcli", "ccsp_bus_client_tool";
     symlink "cli_start_pc.sh", "cli_start.sh";
     symlink "cosa_start_pc.sh", "cosa_start.sh";
